@@ -4,7 +4,7 @@ import { getCollection } from "astro:content";
 import { RiArrowRightUpLine } from "react-icons/ri";
 import { Image } from "astro:assets";
 
-const allPosts = await getCollection("lab");
+const allPosts = await getCollection("thoughts");
 
 allPosts.sort((a, b) => {
 	const dateA = new Date(a.data.date);
@@ -13,19 +13,19 @@ allPosts.sort((a, b) => {
 });
 ---
 
-<Layout title="Lakshay Bhushan • Lab">
-	<h1 class="text-[2rem] font-bold tracking-tight text-primary">Lab</h1>
+<Layout title="Lakshay Bhushan • thoughts">
+	<h1 class="text-[2rem] font-bold tracking-tight text-primary">Thoughts</h1>
 	<h2 class="text-base font-medium tracking-tight text-title">
-		a collection of some concept ui designs and experiments.
+		what I think about design, code, and life.
 	</h2>
 	<section class="pt-4">
 		<div class="grid gap-4 md:grid-cols-2">
 			{
 				allPosts.map((post) => (
 					<a
-						href={"/lab/" + post.slug}
+						href={"/thoughts/" + post.slug}
 						target="_self"
-						class="group mt-2 flex w-full flex-col gap-2.5 overflow-hidden rounded-xl border border-body/20 px-3 py-3 transition-all duration-300 ease-in-out md:-mx-3 md:items-start md:hover:scale-95 md:hover:bg-hoverColor">
+						class="group mt-2 flex w-full flex-col gap-2.5 overflow-hidden rounded-xl border border-body/20 px-3 py-3 transition-all duration-300 ease-in-out md:-mx-3 md:items-start md:hover:scale-105 md:hover:bg-hoverColor">
 						<Image
 							src={post.data.cover}
 							width={800}
@@ -33,7 +33,7 @@ allPosts.sort((a, b) => {
 							format="avif"
 							loading="lazy"
 							class="!m-0 block aspect-video rounded-md object-cover object-center"
-							alt="cover image for posts in lab"
+							alt="cover image for posts in thoughts"
 						/>
 						<div class="flex flex-col items-start">
 							<h2 class="flex items-center justify-between font-medium tracking-tight text-title group-hover:text-primary">

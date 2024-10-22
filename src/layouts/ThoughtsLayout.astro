@@ -2,18 +2,17 @@
 import { AstroFont } from "astro-font";
 import Footer from "../components/Footer.astro";
 import { ViewTransitions } from "astro:transitions";
-// import PostHog from "../components/PostHog.astro";
-import LabNav from "../components/LabNav.astro";
+import ThoughtsNav from "../components/ThoughtsNav.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import Metadata from "../components/Metadata.astro";
 
 interface Props {
-	post: CollectionEntry<"lab">;
+	post: CollectionEntry<"thoughts">;
 }
 
 export async function getStaticPaths() {
-	const blogPosts = await getCollection("lab");
+	const blogPosts = await getCollection("thoughts");
 	return blogPosts.map((post) => ({
 		params: { slug: post.slug },
 		props: { post },
@@ -25,7 +24,6 @@ const { post } = Astro.props;
 if (!post) {
 	return { status: 404 };
 }
-
 ---
 
 <!doctype html>
@@ -45,14 +43,13 @@ if (!post) {
 			slot="head"
 			title={post.data.title}
 			description={post.data.excerpt}
-			image={`${import.meta.env.SITE}/lab/${post.slug}/og.png`}
-			canonicalUrl={`${import.meta.env.SITE}/lab/${post.slug}/`}
+			image={`${import.meta.env.SITE}/thoughts/${post.slug}/og.png`}
+			canonicalUrl={`${import.meta.env.SITE}/thoughts/${post.slug}/`}
 			publishedTime={post.data.date.toISOString()}
 			type="article"
 		/>
 
-		<title>Lab • {post.data.title}</title>
-		<!-- <PostHog /> -->
+		<title>thoughts • {post.data.title}</title>
 		<AstroFont
 			config={[
 				{
@@ -74,7 +71,7 @@ if (!post) {
 	</head>
 	<body
 		class="mx-auto my-8 max-w-[400px] px-4 text-body selection:bg-primary selection:text-hoverColor md:my-16 md:max-w-[600px]">
-		<LabNav />
+		<ThoughtsNav />
 		<slot />
 		<Footer />
 		<ViewTransitions />

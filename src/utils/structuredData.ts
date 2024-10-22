@@ -7,12 +7,12 @@ import {
 import avatar from "../assets/avatar.png";
 import type { CollectionEntry } from "astro:content";
 
-export const labWebsite: WithContext<WebSite> = {
+export const thoughtsWebsite: WithContext<WebSite> = {
 	"@context": "https://schema.org",
 	"@type": "WebSite",
-	url: `${import.meta.env.SITE}/lab/`,
-	name: "Lakshay Bhushan • lab",
-	description: "lab, writings from Lakshay Bhushan",
+	url: `${import.meta.env.SITE}/thoughts/`,
+	name: "Lakshay Bhushan • Thoughts",
+	description: "Thoughts, writings from Lakshay Bhushan",
 	inLanguage: "en_US",
 };
 
@@ -38,12 +38,12 @@ export const personSchema: WithContext<Person> = {
 	],
 };
 
-export function getArticleSchema(post: CollectionEntry<"lab">) {
+export function getArticleSchema(post: CollectionEntry<"thoughts">) {
 	const articleStructuredData: WithContext<Article> = {
 		"@context": "https://schema.org",
 		"@type": "Article",
 		headline: post.data.title,
-		url: `${import.meta.env.SITE}/lab/${post.slug}/`,
+		url: `${import.meta.env.SITE}/thoughts/${post.slug}/`,
 		image: {
 			"@type": "ImageObject",
 			url: `${import.meta.env.SITE}${post.data.cover.src}/`,
