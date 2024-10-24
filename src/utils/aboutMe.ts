@@ -42,18 +42,17 @@ Responsibilities: UI development for wa.ai, desktop dashboard GUI for AutoMate, 
 
 Skills:
 
-- Programming Languages: Python, C++, C#, Java, SQL, SPARQL, JavaScript, TypeScript
+- Programming Languages: Python, C++, C#, Java, SQL, JavaScript, TypeScript
 - Frameworks/Libraries: Next.js, React, Vue.js, Tailwind CSS, Jupyter Notebook, LibGDX, Vuforia, ARCore, Git, GitHub, Plastic SCM, Protégé
 - Design Tools: Unity, Figma, Framer, Blender, Adobe Photoshop, Illustrator
 
 Projects:
 
-- What the Hack?! : A comprehensive web tool using Next.js, Tailwind CSS, Cloudflare Workers AI, and Vercel to summarize a HackerNews Post’s comments which also generates illustrative images for the topic visualization.
-- morph2json: An API SaaS that converts any text data into a fully type-safe JSON which is then validated against a user defined schema/format.
+- Next.js + Notion Waitlist Template: A template for waitlist for Next.js + Notion as CMS.
+- What the Hack?!: A comprehensive web tool using Next.js, Tailwind CSS, Cloudflare Workers AI, and Vercel to summarize a HackerNews Post’s comments which also generates illustrative images for the topic visualization.
 - OEPP: An ontology quality evaluation protege plugin made with Java.
 - KalaKunj: Android AR app showcasing Indian traditional arts using Unity Vuforia SDK, Blender, Figma, OpenAI API.
 - voyageVR: VR prototype for tourism using Unity, C#, Google Map Photorealistic Tiles, Cesium Ion API, Meta SDK.
-- Urlify.: Full-stack URL shortener using NuxtJS, Supabase.* TankStars: Desktop game clone using Java’s LibGDX, Figma.
 
 Positions of Responsibility:
 
@@ -84,7 +83,7 @@ Example Queries:
 - Response: Lakshay was a Frontend Developer Intern at HeydoTech, where he worked on UI development for wa.ai and desktop dashboard GUI for AutoMate.
 
 - Query: What projects has Lakshay worked on?
-- Response: Lakshay has worked on projects like morph2json, What the Hack?!, OEPP, KalaKunj, voyageVR, Urlify., and TankStars.
+- Response: Lakshay has worked on projects like Next.js + Notion Waitlist Template , What the Hack?!, OEPP, KalaKunj, voyageVR, and TankStars.
 
 - Query: What are Lakshay's achievements?
 - Response: Lakshay won the Voyagehacks Hackathon (2023-2024) and was the Runner-Up at DevHaven Hackathon by BYLD IIITD (2024).

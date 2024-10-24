@@ -10,6 +10,7 @@
 		"astro": "astro"
 	},
 	"dependencies": {
+		"@ai-sdk/google": "^0.0.52",
 		"@ai-sdk/openai": "^0.0.66",
 		"@astrojs/check": "0.9.4",
 		"@astrojs/mdx": "3.1.8",
@@ -20,6 +21,7 @@
 		"@types/react": "^18.3.11",
 		"@types/react-dom": "^18.3.1",
 		"@vercel/og": "^0.6.3",
+		"@vercel/speed-insights": "^1.0.13",
 		"ai": "^3.4.10",
 		"astro": "4.16.1",
 		"astro-font": "^0.1.81",

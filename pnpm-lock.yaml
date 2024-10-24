@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@ai-sdk/google':
+        specifier: ^0.0.52
+        version: 0.0.52(zod@3.23.8)
       '@ai-sdk/openai':
         specifier: ^0.0.66
         version: 0.0.66(zod@3.23.8)
@@ -38,6 +41,9 @@ importers:
       '@vercel/og':
         specifier: ^0.6.3
         version: 0.6.3
+      '@vercel/speed-insights':
+        specifier: ^1.0.13
+        version: 1.0.13(react@18.3.1)(svelte@4.2.19)(vue@3.5.12(typescript@5.6.3))
       ai:
         specifier: ^3.4.10
         version: 3.4.10(openai@4.67.3(zod@3.23.8))(react@18.3.1)(sswr@2.1.0(svelte@4.2.19))(svelte@4.2.19)(vue@3.5.12(typescript@5.6.3))(zod@3.23.8)
@@ -116,6 +122,12 @@ importers:
         version: 0.5.15(tailwindcss@3.4.13)
 
 packages:
+
+  '@ai-sdk/google@0.0.52':
+    resolution: {integrity: sha512-bfsA/1Ae0SQ6NfLwWKs5SU4MBwlzJjVhK6bTVBicYFjUxg9liK/W76P1Tq/qK9OlrODACz3i1STOIWsFPpIOuQ==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      zod: ^3.0.0
 
   '@ai-sdk/openai@0.0.66':
     resolution: {integrity: sha512-V4XeDnlNl5/AY3GB3ozJUjqnBLU5pK3DacKTbCNH3zH8/MggJoH6B8wRGdLUPVFMcsMz60mtvh4DC9JsIVFrKw==}
@@ -900,6 +912,29 @@ packages:
   '@vercel/og@0.6.3':
     resolution: {integrity: sha512-aoCrC9FqkeA+WEEb9CwSmjD0rGlFeNqbUsI41JPmKWR9Hx6FFn86tvH96O5HZMF6VAXTGHxa3nPH3BokROpdgA==}
     engines: {node: '>=16'}
+
+  '@vercel/speed-insights@1.0.13':
+    resolution: {integrity: sha512-3iuOMB/M0WE3Zeuoo2mnlD7Eo7fGH7RBGi92Vq4qO7Kp+BwNbpwFqkjuPQDEeBxoGQLJFRICrsx5/IluHZVCZA==}
+    peerDependencies:
+      '@sveltejs/kit': ^1 || ^2
+      next: '>= 13'
+      react: ^18 || ^19
+      svelte: '>= 4'
+      vue: ^3
+      vue-router: ^4
+    peerDependenciesMeta:
+      '@sveltejs/kit':
+        optional: true
+      next:
+        optional: true
+      react:
+        optional: true
+      svelte:
+        optional: true
+      vue:
+        optional: true
+      vue-router:
+        optional: true
 
   '@vitejs/plugin-react@4.3.2':
     resolution: {integrity: sha512-hieu+o05v4glEBucTcKMK3dlES0OeJlD9YVOAPraVMOInBCwzumaIFiUjr4bHK7NPgnAHgiskUoceKercrN8vg==}
@@ -3149,6 +3184,13 @@ packages:
 
 snapshots:
 
+  '@ai-sdk/google@0.0.52(zod@3.23.8)':
+    dependencies:
+      '@ai-sdk/provider': 0.0.24
+      '@ai-sdk/provider-utils': 1.0.20(zod@3.23.8)
+      json-schema: 0.4.0
+      zod: 3.23.8
+
   '@ai-sdk/openai@0.0.66(zod@3.23.8)':
     dependencies:
       '@ai-sdk/provider': 0.0.24
@@ -3994,6 +4036,12 @@ snapshots:
       '@resvg/resvg-wasm': 2.4.0
       satori: 0.10.9
       yoga-wasm-web: 0.3.3
+
+  '@vercel/speed-insights@1.0.13(react@18.3.1)(svelte@4.2.19)(vue@3.5.12(typescript@5.6.3))':
+    optionalDependencies:
+      react: 18.3.1
+      svelte: 4.2.19
+      vue: 3.5.12(typescript@5.6.3)
 
   '@vitejs/plugin-react@4.3.2(vite@5.4.9(@types/node@18.19.55))':
     dependencies:

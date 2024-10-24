@@ -7,6 +7,7 @@ export default {
 		extend: {
 			fontFamily: {
 				sans: ["Satoshi", ...defaultTheme.fontFamily.sans],
+				serif: ["Instrument-Serif", ...defaultTheme.fontFamily.serif],
 			},
 			colors: {
 				bgColor: "#FDFFF4",

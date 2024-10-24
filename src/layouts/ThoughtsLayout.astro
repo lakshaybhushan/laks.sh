@@ -9,6 +9,8 @@ import Metadata from "../components/Metadata.astro";
 
 interface Props {
 	post: CollectionEntry<"thoughts">;
+	prev: CollectionEntry<"thoughts"> | null;
+	next: CollectionEntry<"thoughts"> | null;
 }
 
 export async function getStaticPaths() {
@@ -66,11 +68,25 @@ if (!post) {
 					selector: "body",
 					fallback: "sans-serif",
 				},
+				{
+					name: "Instrument-Serif",
+					src: [
+						{
+							style: "normal",
+							weight: "400",
+							path: "./public/fonts/InstrumentSerif-Regular.ttf",
+						},
+					],
+					preload: true,
+					display: "swap",
+					selector: "body",
+					fallback: "serif",
+				},
 			]}
 		/>
 	</head>
 	<body
-		class="mx-auto my-8 max-w-[400px] px-4 text-body selection:bg-primary selection:text-hoverColor md:my-16 md:max-w-[600px]">
+		class="mx-auto my-8 max-w-[400px] px-4 font-sans text-body selection:bg-primary selection:text-hoverColor md:my-16 md:max-w-[600px]">
 		<ThoughtsNav />
 		<slot />
 		<Footer />

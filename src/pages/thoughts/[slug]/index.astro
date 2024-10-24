@@ -2,21 +2,31 @@
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import ThoughtsLayout from "../../../layouts/ThoughtsLayout.astro";
-import { getArticleSchema, thoughtsWebsite } from "../../../utils/structuredData";
+import { MdOutlineKeyboardBackspace } from "react-icons/md";
+import {
+	getArticleSchema,
+	thoughtsWebsite,
+} from "../../../utils/structuredData";
 
 interface Props {
 	post: CollectionEntry<"thoughts">;
+	prev: CollectionEntry<"thoughts"> | null;
+	next: CollectionEntry<"thoughts"> | null;
 }
 
 export async function getStaticPaths() {
 	const blogPosts = await getCollection("thoughts");
-	return blogPosts.map((post) => ({
+	return blogPosts.map((post, index) => ({
 		params: { slug: post.slug },
-		props: { post },
+		props: {
+			post,
+			prev: index > 0 ? blogPosts[index - 1] : null,
+			next: index < blogPosts.length - 1 ? blogPosts[index + 1] : null,
+		},
 	}));
 }
 
-const { post } = Astro.props;
+const { post, prev, next } = Astro.props;
 
 if (!post) {
 	return { status: 404 };
@@ -51,25 +61,58 @@ const jsonLd = {
 };
 ---
 
-<ThoughtsLayout post={post}>
+<ThoughtsLayout post={post} prev={prev} next={next}>
 	<script
 		is:inline
 		type="application/ld+json"
 		set:html={JSON.stringify(jsonLd)}
 	/>
 	<div>
-		<h1 class="text-[2rem] font-bold tracking-tight text-primary">
+		<h1 class="font-serif text-[2.5rem] tracking-tight text-primary">
 			{post.data.title}
 		</h1>
-		<p class="lead mb-2 text-base font-medium tracking-tight text-title">
+
+		<p class="mb-2 text-base font-medium tracking-tight text-title">
 			{post.data.excerpt}
 		</p>
 
+		<p class="text-sm font-normal text-body">
+			{
+				new Date(post.data.date).toLocaleDateString("en-US", {
+					day: "numeric",
+					month: "short",
+					year: "numeric",
+				})
+			}
+		</p>
+
 		<article
-			class="prose prose-sm prose-headings:text-title prose-a:no-underline prose-blockquote:text-title prose-strong:text-body prose-code:p-1.5 prose-code:text-[12px] prose-pre:text-wrap prose-pre:rounded-md prose-li:marker:text-body prose-img:rounded-md">
+			class="prose prose-sm prose-headings:text-title prose-a:text-primary prose-a:underline-offset-4 prose-blockquote:text-title prose-strong:text-body prose-code:p-1.5 prose-code:text-[12px] prose-pre:text-wrap prose-pre:rounded-md prose-li:marker:text-body prose-img:h-auto prose-img:max-w-full prose-img:rounded-md prose-img:border prose-img:border-body/20">
 			<div class="font-normal text-body">
 				<Content />
 			</div>
 		</article>
+	</div>
+
+	<!-- Navigation between thoughts previous and next -->
+	<div class="flex justify-between text-sm text-body transition-colors duration-150 underline-offset-4">
+		{
+			prev ? (
+				<a href={`/thoughts/${prev.slug}`} class="truncate max-w-xs md:hover:text-primary md:hover:underline">
+					<MdOutlineKeyboardBackspace className="-mt-0.5 inline-block" />
+					{prev.data.title}
+				</a>
+			) : (
+				<div />
+			)
+		}
+		{
+			next && (
+				<a href={`/thoughts/${next.slug}`} class="truncate max-w-xs text-right md:hover:text-primary md:hover:underline">
+					{next.data.title}
+					<MdOutlineKeyboardBackspace className="-mt-0.5 inline-block rotate-180" />
+					</a>
+			)
+		}
 	</div>
 </ThoughtsLayout>
