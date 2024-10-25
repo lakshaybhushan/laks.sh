@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FaSpotify } from "react-icons/fa6";
 import { motion, AnimatePresence } from "framer-motion";
+import { RiArrowRightUpLine } from "react-icons/ri";
 
 const variants = {
 	initial: { opacity: 0, y: 20 },
@@ -63,7 +64,7 @@ const SpotifyNowPlaying = () => {
 							<FaSpotify className="text-2xl" />
 						</div>
 						<p className="text-xs">
-							<span className="font-medium text-black underline-offset-4 transition duration-150 ease-in-out md:hover:text-primary md:hover:underline">
+							<span className="font-medium text-black underline-offset-4 transition duration-150 ease-in-out">
 								Hold up
 							</span>
 							<br />
@@ -82,23 +83,24 @@ const SpotifyNowPlaying = () => {
 					href={result.songUrl}
 					rel="noopener noreferrer"
 					target="_blank">
-					<div className="flex h-[45px]">
+					<div className="group flex h-[45px] transition-all duration-300 ease-in-out md:hover:scale-105">
 						{result.albumImageUrl ? (
 							<motion.img
 								src={result.albumImageUrl}
 								alt="Album Art"
 								width={45}
-								className="rounded-md"
+								className="rounded-md transition-all duration-300 ease-in-out md:group-hover:grayscale"
 								initial={{ scale: 0.8, opacity: 0 }}
 								animate={{ scale: 1, opacity: 1 }}
 								transition={{ duration: 0.3 }}
 							/>
 						) : (
 							<motion.img
-								src="/icons/Afternoon.svg"
+								src="/fallback.png"
 								width={45}
 								height={45}
 								alt="fallbackImage"
+								className="rounded-md"
 								initial={{ scale: 0.8, opacity: 0 }}
 								animate={{ scale: 1, opacity: 1 }}
 								transition={{ duration: 0.3 }}
@@ -109,10 +111,11 @@ const SpotifyNowPlaying = () => {
 							initial={{ opacity: 0, x: 20 }}
 							animate={{ opacity: 1, x: 0 }}
 							transition={{ duration: 0.3, delay: 0.1 }}>
-							<h3 className="text-xs font-medium text-black underline-offset-4 transition duration-150 ease-in-out hover:text-primary hover:underline">
+							<h3 className="text-xs font-medium text-black transition duration-150 ease-in-out md:group-hover:text-primary">
 								{result.title}
+								<RiArrowRightUpLine className="inline text-primary opacity-0 transition-opacity duration-150 group-hover:opacity-100" />
 							</h3>
-							<p className="text-xs text-black underline-offset-4 transition duration-150 ease-in-out hover:text-primary hover:underline">
+							<p className="text-xs text-black transition duration-150 ease-in-out md:group-hover:text-primary">
 								{result.artist}
 							</p>
 						</motion.div>
@@ -129,12 +132,12 @@ const SpotifyNowPlaying = () => {
 					href="https://open.spotify.com/user/amcdf5xiittevf5gl1ecjqfyu"
 					rel="noopener noreferrer"
 					target="_blank">
-					<div className="flex items-center gap-2 text-sm text-body">
+					<div className="flex items-center gap-2 text-sm text-body transition-all duration-300 ease-in-out md:hover:scale-105">
 						<div className="flex h-[45px] w-[45px] items-center justify-center rounded-md bg-[#1CB955] text-black">
 							<FaSpotify className="text-2xl" />
 						</div>
 						<p className="text-xs">
-							<span className="font-medium text-black underline-offset-4 transition duration-150 ease-in-out md:hover:text-primary md:hover:underline">
+							<span className="font-medium text-black underline-offset-4 transition duration-150 ease-in-out">
 								Not playing
 							</span>
 							<br />

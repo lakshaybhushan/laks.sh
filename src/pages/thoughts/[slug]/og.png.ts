@@ -40,9 +40,7 @@ export async function GET({ props }: Props) {
 					style: {
 						fontFamily: "Satoshi-Bold",
 						maxWidth: "80%",
-						background: "linear-gradient(180deg, #00997E 45%, #F1F9F2 100%)",
-						WebkitBackgroundClip: "text",
-						WebkitTextFillColor: "transparent",
+						background: "linear-gradient(180deg, #00997E 20%, #B1FFD0 120%)",
 						backgroundClip: "text",
 						color: "transparent",
 					},
@@ -62,7 +60,7 @@ export async function GET({ props }: Props) {
 				},
 				React.createElement("img", {
 					tw: "w-6 h-6 rounded-full mr-4",
-					src: "https://www.lakshb.dev/favicon.svg", // Replace with your actual GitHub username or profile picture URL
+					src: "https://www.lakshb.dev/favicon.svg",
 					alt: "Lakshay Bhushan",
 				}),
 				React.createElement(
@@ -109,7 +107,7 @@ export async function GET({ props }: Props) {
 
 export async function getStaticPaths() {
 	const blogPosts = await getCollection("thoughts");
-	return blogPosts.map((post) => ({
+	return blogPosts.map((post: any) => ({
 		params: { slug: post.slug },
 		props: { post },
 	}));

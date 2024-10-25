@@ -16,7 +16,7 @@ interface Props {
 
 export async function getStaticPaths() {
 	const blogPosts = await getCollection("thoughts");
-	return blogPosts.map((post, index) => ({
+	return blogPosts.map((post: any, index: number) => ({
 		params: { slug: post.slug },
 		props: {
 			post,
@@ -95,10 +95,13 @@ const jsonLd = {
 	</div>
 
 	<!-- Navigation between thoughts previous and next -->
-	<div class="flex justify-between text-sm text-body transition-colors duration-150 underline-offset-4">
+	<div
+		class="flex justify-between text-sm text-body underline-offset-4 transition-colors duration-150">
 		{
 			prev ? (
-				<a href={`/thoughts/${prev.slug}`} class="truncate max-w-xs md:hover:text-primary md:hover:underline">
+				<a
+					href={`/thoughts/${prev.slug}`}
+					class="max-w-xs truncate md:hover:text-primary md:hover:underline">
 					<MdOutlineKeyboardBackspace className="-mt-0.5 inline-block" />
 					{prev.data.title}
 				</a>
@@ -108,10 +111,12 @@ const jsonLd = {
 		}
 		{
 			next && (
-				<a href={`/thoughts/${next.slug}`} class="truncate max-w-xs text-right md:hover:text-primary md:hover:underline">
+				<a
+					href={`/thoughts/${next.slug}`}
+					class="max-w-xs truncate text-right md:hover:text-primary md:hover:underline">
 					{next.data.title}
 					<MdOutlineKeyboardBackspace className="-mt-0.5 inline-block rotate-180" />
-					</a>
+				</a>
 			)
 		}
 	</div>

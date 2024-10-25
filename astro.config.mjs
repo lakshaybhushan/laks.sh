@@ -14,14 +14,17 @@ export default defineConfig({
   integrations: [react(), tailwind(), mdx({
     syntaxHighlight: false,
     rehypePlugins: [rehypeSlug, [rehypePrettyCode, {
-      theme: "one-dark-pro",
+      theme: "everforest-dark",
     }]]
   }), sitemap(), robotsTxt()],
   site: "https://lakshb.dev",
   adapter: vercel({
     webAnalytics: {
-      enabled: true
-    },
-    includeFiles: ["./public/fonts/Satoshi-Medium.ttf", "./public/fonts/Satoshi-Bold.ttf"]
-  })
+			enabled: true,
+		},
+		includeFiles: [
+			"./public/fonts/Satoshi-Medium.ttf",
+			"./public/fonts/Satoshi-Bold.ttf",
+		],
+	}),
 });

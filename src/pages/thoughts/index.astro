@@ -27,16 +27,16 @@ type Post = (typeof allPosts)[number];
 					<a
 						href={"/thoughts/" + post.slug}
 						target="_self"
-						class="group -mx-3 mt-2 flex w-full flex-col gap-2.5 overflow-hidden rounded-xl px-3 py-3 transition-all duration-300 ease-in-out md:items-start md:hover:scale-105 md:hover:bg-hoverColor">
-						{/* <Image
+						class="group -mx-3 mt-2 flex w-full gap-2.5 overflow-hidden rounded-xl px-3 py-3 transition-all duration-300 ease-in-out md:items-start md:hover:scale-105 md:hover:bg-hoverColor">
+						<Image
 							src={post.data.cover}
-							width={800}
-							height={800}
+							width={250}
+							height={250}
 							format="avif"
 							loading="lazy"
-							class="!m-0 block aspect-video rounded-md object-cover object-center"
+							class="!m-0 block aspect-square h-12 w-12 rounded-md border border-body/20 object-cover object-center group-hover:border-primary/40"
 							alt="cover image for posts in thoughts"
-						/> */}
+						/>
 						<div class="flex w-full flex-col items-start">
 							<div class="flex w-full items-center justify-between">
 								<h2 class="flex items-center justify-between font-medium tracking-tight text-title group-hover:text-primary">
@@ -52,7 +52,7 @@ type Post = (typeof allPosts)[number];
 								</p>
 							</div>
 
-							<p class="pt-0.5 text-sm font-normal text-body">
+							<p class="pt-0.5 text-sm font-normal text-body max-w-[90%] truncate">
 								{post.data.excerpt}
 							</p>
 						</div>
