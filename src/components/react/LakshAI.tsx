@@ -135,6 +135,8 @@ export default function LakshAI() {
 					<button
 						type="submit"
 						disabled={isDisabled}
+						aria-label="Send message"
+						name="send message"
 						className="rounded-r-full border border-l-0 border-body/20 px-1.5 focus:outline-none focus:ring-0 active:focus:outline-none">
 						<div
 							className={`rounded-full p-2 ${isDisabled ? "bg-hoverColor transition duration-300 ease-in-out" : "bg-primary transition duration-300 ease-in-out md:hover:scale-95"}`}>

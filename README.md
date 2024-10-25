@@ -17,8 +17,3 @@
 <a href="https://lakshb.dev" target="_blank" rel="noreferrer noopenner">
 <img src="./public/og.png" alt="lakshb.dev" width="100%">
 </a>
-
-
-## TODO:
-
-- [ ] Update laksh://ai prompt

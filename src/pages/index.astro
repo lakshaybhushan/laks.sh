@@ -1,16 +1,20 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { RiArrowRightUpLine } from "react-icons/ri";
+import { Icon } from "astro-icon/components";
 import { PiLightbulbFill } from "react-icons/pi";
-import ProjectCard from "../components/react/Card.tsx";
+import { RiArrowRightUpLine } from "react-icons/ri";
 import projectsData from "../constants/projects.json";
+import ProjectCard from "../components/react/Card.tsx";
+import socialsData from "../constants/socials.json";
+
 
 const projects = projectsData;
+const socials = socialsData;
 ---
 
 <Layout title="Lakshay Bhushan">
 	<main>
-		<h1 class="text-[2.5rem] font-serif tracking-tight text-primary">
+		<h1 class="font-serif text-[2.5rem] tracking-tight text-primary">
 			Lakshay Bhushan
 		</h1>
 		<div class="flex items-center gap-1.5 font-medium tracking-tight">
@@ -30,46 +34,20 @@ const projects = projectsData;
 			ideas.
 		</p>
 
-		<div class="flex w-fit items-start gap-2 pt-4 tracking-tight">
-			<a
-				href="/resume"
-				target="_self"
-				class="group flex items-center underline-offset-4 transition duration-150 ease-in-out md:hover:text-primary md:hover:underline">
-				<span>resume</span>
-				<RiArrowRightUpLine
-					className="opacity-0 transition-opacity duration-150 md:group-hover:opacity-100"
-				/>
-			</a>
-			<a
-				href="https://linkedin.com/in/lakshaybhushan"
-				rel="noopenner noreferrer"
-				target="_blank"
-				class="group flex items-center underline-offset-4 transition duration-150 ease-in-out md:hover:text-primary md:hover:underline">
-				<span>linkedin</span>
-				<RiArrowRightUpLine
-					className="opacity-0 transition-opacity duration-150 md:group-hover:opacity-100"
-				/>
-			</a>
-			<a
-				href="https://behance.com/lakshaybhushan"
-				rel="noopenner noreferrer"
-				target="_blank"
-				class="group flex items-center underline-offset-4 transition duration-150 ease-in-out md:hover:text-primary md:hover:underline">
-				<span>behance</span>
-				<RiArrowRightUpLine
-					className="opacity-0 transition-opacity duration-150 md:group-hover:opacity-100"
-				/>
-			</a>
-			<a
-				href="https://x.com/blakssh"
-				rel="noopenner noreferrer"
-				target="_blank"
-				class="group flex items-center underline-offset-4 transition duration-150 ease-in-out md:hover:text-primary md:hover:underline">
-				<span>twitter</span>
-				<RiArrowRightUpLine
-					className="opacity-0 transition-opacity duration-150 md:group-hover:opacity-100"
-				/>
-			</a>
+		<div class="w-fit grid grid-cols-3 gap-2 pt-4 tracking-tight md:flex md:flex-row md:items-start">
+			{
+				socials.map((social) => (
+					<a
+						href={social.url}
+						target={social.target}
+						rel={social.target === "_blank" ? "noopener noreferrer" : undefined}
+						class="group flex items-center underline-offset-4 transition duration-150 ease-in-out md:hover:text-primary md:hover:underline">
+						<Icon name={social.icon} size={14} class="mr-1.5" />
+						<span class="text-sm">{social.name}</span>
+						<RiArrowRightUpLine className="opacity-0 transition-opacity duration-150 md:group-hover:opacity-100" />
+					</a>
+				))
+			}
 		</div>
 
 		<section class="pt-8">
@@ -100,11 +78,10 @@ const projects = projectsData;
 		</section>
 
 		<div class="flex w-full items-center justify-center pt-8">
-			<img
-				src="/Signature.svg"
-				alt="lakshay's signature"
-				width="108"
-				height="56.04"
+			<Icon
+				name="signature"
+				width={133}
+				height={81.04}
 			/>
 		</div>
 	</main>
