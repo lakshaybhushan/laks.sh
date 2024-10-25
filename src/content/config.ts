@@ -14,5 +14,5 @@ const postsCollection = defineCollection({
 });
 
 export const collections = {
-	lab: postsCollection,
+	thoughts: postsCollection,
 };

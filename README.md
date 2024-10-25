@@ -6,14 +6,10 @@
 <img src ="https://img.shields.io/badge/React-61DAFB.svg?style=for-the-badge&logo=React&logoColor=black">
 <img src ="https://img.shields.io/badge/TypeScript-3178C6.svg?style=for-the-badge&logo=TypeScript&logoColor=white">
 <img src ="https://img.shields.io/badge/MDX-1B1F24.svg?style=for-the-badge&logo=MDX&logoColor=white">
-<img src ="https://img.shields.io/badge/Drizzle%20ORM-C5F74F.svg?style=for-the-badge&logo=Drizzle&logoColor=black">
-<img src ="https://img.shields.io/badge/Turso-4FF8D2.svg?style=for-the-badge&logo=Turso&logoColor=black">
-<img src="https://img.shields.io/badge/Groq%20AI-FF6600.svg?style=for-the-badge&logo=Google&logoColor=white">
 <img src ="https://img.shields.io/badge/Spotify%20API-1DB954.svg?style=for-the-badge&logo=Spotify&logoColor=white">
 <img src ="https://img.shields.io/badge/Tailwind%20CSS-06B6D4.svg?style=for-the-badge&logo=Tailwind-CSS&logoColor=white">
 <img src ="https://img.shields.io/badge/Framer%20Motion-0055FF.svg?style=for-the-badge&logo=Framer&logoColor=white">
 <img src ="https://img.shields.io/badge/Prettier-F7B93E.svg?style=for-the-badge&logo=Prettier&logoColor=black">
-<img src ="https://img.shields.io/badge/PostHog-F64E00.svg?style=for-the-badge&logo=PostHog&logoColor=white">
 <img src ="https://img.shields.io/badge/Vercel-000000.svg?style=for-the-badge&logo=Vercel&logoColor=white">
 
 </p>

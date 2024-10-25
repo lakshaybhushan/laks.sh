@@ -1,0 +1,123 @@
+---
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import ThoughtsLayout from "../../../layouts/ThoughtsLayout.astro";
+import { MdOutlineKeyboardBackspace } from "react-icons/md";
+import {
+	getArticleSchema,
+	thoughtsWebsite,
+} from "../../../utils/structuredData";
+
+interface Props {
+	post: CollectionEntry<"thoughts">;
+	prev: CollectionEntry<"thoughts"> | null;
+	next: CollectionEntry<"thoughts"> | null;
+}
+
+export async function getStaticPaths() {
+	const blogPosts = await getCollection("thoughts");
+	return blogPosts.map((post: any, index: number) => ({
+		params: { slug: post.slug },
+		props: {
+			post,
+			prev: index > 0 ? blogPosts[index - 1] : null,
+			next: index < blogPosts.length - 1 ? blogPosts[index + 1] : null,
+		},
+	}));
+}
+
+const { post, prev, next } = Astro.props;
+
+if (!post) {
+	return { status: 404 };
+}
+
+const { Content } = await post.render();
+
+const articleStructuredData = getArticleSchema(post);
+
+const breadcrumbsStructuredData = {
+	"@context": "https://schema.org",
+	"@type": "BreadcrumbList",
+	itemListElement: [
+		{
+			"@type": "ListItem",
+			position: 1,
+			name: "thoughts",
+			item: `${import.meta.env.SITE}/thoughts/`,
+		},
+		{
+			"@type": "ListItem",
+			position: 2,
+			name: post.data.title,
+			item: `${import.meta.env.SITE}/thoughts/${post.slug}/`,
+		},
+	],
+};
+
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@graph": [articleStructuredData, breadcrumbsStructuredData, thoughtsWebsite],
+};
+---
+
+<ThoughtsLayout post={post} prev={prev} next={next}>
+	<script
+		is:inline
+		type="application/ld+json"
+		set:html={JSON.stringify(jsonLd)}
+	/>
+	<div>
+		<h1 class="font-serif text-[2.5rem] tracking-tight text-primary">
+			{post.data.title}
+		</h1>
+
+		<p class="mb-2 text-base font-medium tracking-tight text-title">
+			{post.data.excerpt}
+		</p>
+
+		<p class="text-sm font-normal text-body">
+			{
+				new Date(post.data.date).toLocaleDateString("en-US", {
+					day: "numeric",
+					month: "short",
+					year: "numeric",
+				})
+			}
+		</p>
+
+		<article
+			class="prose prose-sm prose-headings:text-title prose-a:text-primary prose-a:underline-offset-4 prose-blockquote:text-title prose-strong:text-body prose-code:p-1.5 prose-code:text-[12px] prose-pre:text-wrap prose-pre:rounded-md prose-li:marker:text-body prose-img:h-auto prose-img:max-w-full prose-img:rounded-md prose-img:border prose-img:border-body/20">
+			<div class="font-normal text-body">
+				<Content />
+			</div>
+		</article>
+	</div>
+
+	<!-- Navigation between thoughts previous and next -->
+	<div
+		class="flex justify-between text-sm text-body underline-offset-4 transition-colors duration-150">
+		{
+			prev ? (
+				<a
+					href={`/thoughts/${prev.slug}`}
+					class="max-w-xs truncate md:hover:text-primary md:hover:underline">
+					<MdOutlineKeyboardBackspace className="-mt-0.5 inline-block" />
+					{prev.data.title}
+				</a>
+			) : (
+				<div />
+			)
+		}
+		{
+			next && (
+				<a
+					href={`/thoughts/${next.slug}`}
+					class="max-w-xs truncate text-right md:hover:text-primary md:hover:underline">
+					{next.data.title}
+					<MdOutlineKeyboardBackspace className="-mt-0.5 inline-block rotate-180" />
+				</a>
+			)
+		}
+	</div>
+</ThoughtsLayout>

@@ -1,0 +1,30 @@
+---
+title: "Hover Button"
+date: 2024-07-05
+excerpt: "a simple button made with tailwind css."
+cover: ../../assets/hover-button.png
+---
+
+import Playground from "../../components/Playground.astro";
+import HoverButton from "../ui-experiments/hoverButton";
+
+<Playground>
+	<HoverButton />
+</Playground>
+
+```tsx
+import React from "react";
+
+export default function HoverButton() {
+	return (
+		<button className="group relative inline-flex h-10 items-center justify-center overflow-hidden rounded-full bg-[#00997E] px-6 font-medium text-[#FDFFF4] transition duration-300 hover:rotate-1 hover:scale-110 hover:shadow-lg hover:shadow-[#00997E]/50">
+			<span className="relative z-10 transition-transform group-hover:scale-110">
+				Hover me
+			</span>
+			<div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-12deg)_translateX(-100%)] group-hover:duration-1000 group-hover:[transform:skew(-12deg)_translateX(100%)]">
+				<div className="relative h-full w-8 bg-white/20" />
+			</div>
+		</button>
+	);
+}
+```

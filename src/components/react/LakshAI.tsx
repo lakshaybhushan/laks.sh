@@ -73,10 +73,7 @@ export default function LakshAI() {
 										? "rounded-full bg-blue-100 text-blue-700"
 										: "rounded-full bg-green-100 text-emerald-700"
 								} max-w-xs rounded-lg px-2.5 py-1.5`}>
-								<div
-									dangerouslySetInnerHTML={{ __html: marked(m.content) }}
-									className="antialiased"
-								/>
+								<div dangerouslySetInnerHTML={{ __html: marked(m.content) }} />
 							</div>
 						</motion.div>
 					))}
@@ -138,6 +135,8 @@ export default function LakshAI() {
 					<button
 						type="submit"
 						disabled={isDisabled}
+						aria-label="Send message"
+						name="send message"
 						className="rounded-r-full border border-l-0 border-body/20 px-1.5 focus:outline-none focus:ring-0 active:focus:outline-none">
 						<div
 							className={`rounded-full p-2 ${isDisabled ? "bg-hoverColor transition duration-300 ease-in-out" : "bg-primary transition duration-300 ease-in-out md:hover:scale-95"}`}>
@@ -151,11 +150,11 @@ export default function LakshAI() {
 			<p className="pt-4 text-sm text-body/80">
 				Everyone makes mistakes, including this AI powered by{" "}
 				<a
-					href="https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/"
+					href="https://ai.google.dev/"
 					target="_blank"
 					rel="noopener noreferrer"
 					className="text-body underline-offset-4 transition duration-150 ease-in-out md:hover:text-primary md:hover:underline">
-					OpenAI GPT-4o mini
+					Google's Gemini 1.5 Flash 8B
 				</a>{" "}
 				and{" "}
 				<a

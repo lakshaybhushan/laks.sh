@@ -1,0 +1,37 @@
+[
+	{
+		"id": 1,
+		"name": "resume",
+		"url": "/resume",
+		"target": "_self",
+		"icon": "resume"
+	},
+	{
+		"id": 2,
+		"name": "linkedin",
+		"url": "https://www.linkedin.com/in/lakshaybhushan/",
+		"target": "_blank",
+		"icon": "linkedin"
+	},
+	{
+		"id": 3,
+		"name": "twitter",
+		"url": "https://x.com/blakssh",
+		"target": "_blank",
+		"icon": "twitter"
+	},
+	{
+		"id": 4,
+		"name": "github",
+		"url": "https://github.com/lakshaybhushan",
+		"target": "_blank",
+		"icon": "github"
+	},
+	{
+		"id": 5,
+		"name": "email",
+		"url": "mailto:lakshay21397@iiitd.ac.in",
+		"target": "_blank",
+		"icon": "email"
+	}
+]
