@@ -1,21 +1,23 @@
-[
+[	
 	{
 		"id": 1,
-		"title": "Next.js + Notion Waitlist Template",
-		"description": "A simple Next.js + Notion as CMS waitlist template",
-		"link": "https://nextjs-notion-waitlist.vercel.app/"
+		"title": "ArkAid",
+		"tag": "New!",
+		"description": "A game performance analytics platform",
+		"link": "https://github.com/lakshaybhushan/Arkaid-IIA"
 	},
 	{
 		"id": 2,
-		"title": "What the Hack?!",
-		"description": "A HackerNews comments summarizer",
-		"link": "https://wth.lakshb.dev/"
+		"title": "Next.js + Notion Waitlist Template",
+		"tag": "LIVE on Vercel!",
+		"description": "A simple Next.js + Notion as CMS waitlist template",
+		"link": "https://vercel.com/templates/next.js/next-js-waitlist-with-notion-cms"
 	},
 	{
 		"id": 3,
-		"title": "OEPP",
-		"description": "An ontology evaluation protégé plugin",
-		"link": "https://github.com/lakshaybhushan/oepp"
+		"title": "What the Hack?!",
+		"description": "A HackerNews comments summarizer",
+		"link": "https://wth.lakshb.dev/"
 	},
 	{
 		"id": 4,
@@ -26,7 +28,7 @@
 	{
 		"id": 5,
 		"title": "voyageVR",
-		"description": "End traveller focused VR tourism (prototype)",
+		"description": "End traveller focused VR tourism",
 		"link": "https://github.com/lakshaybhushan/voyageVR"
 	}
 ]

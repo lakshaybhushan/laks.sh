@@ -95,10 +95,12 @@ export async function GET({ props }: Props) {
 		fonts: [
 			{
 				name: "Satoshi-Medium",
+				//@ts-ignore
 				data: SatoshiMedium.buffer,
 			},
 			{
 				name: "Satoshi-Bold",
+				//@ts-ignore
 				data: SatoshiBold.buffer,
 			},
 		],
