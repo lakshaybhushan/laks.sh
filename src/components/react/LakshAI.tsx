@@ -45,7 +45,7 @@ export default function LakshAI() {
 		}
 	}, [messages]);
 
-	const handleButtonClick = (text: string) => {
+	const handleButtonClick: (text: string) => void = (text: string) => {
 		setInput(text);
 	};
 
