@@ -25,7 +25,7 @@ type Post = (typeof allPosts)[number];
 			{
 				allPosts.map((post: Post) => (
 					<a
-						href={"/thoughts/" + post.slug}
+						href={"/thoughts/" + post.id}
 						target="_self"
 						class="group -mx-3 mt-2 flex w-full gap-2.5 overflow-hidden rounded-xl px-3 py-3 transition-all duration-300 ease-in-out md:items-start md:hover:scale-105 md:hover:bg-hoverColor">
 						<Image

@@ -3,23 +3,26 @@ import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
 import rehypeSlug from "rehype-slug";
 import sitemap from "@astrojs/sitemap";
-import tailwind from "@astrojs/tailwind";
 import robotsTxt from "astro-robots-txt";
 import { defineConfig } from "astro/config";
-import vercel from "@astrojs/vercel/serverless";
+import vercel from "@astrojs/vercel";
 import rehypePrettyCode from "rehype-pretty-code";
+import tailwindcss from "@tailwindcss/vite";
 
 
 // https://astro.build/config
 export default defineConfig({
-  output: "hybrid",
-  integrations: [react(), tailwind(), mdx({
+  output: "static",
+
+  integrations: [react(), mdx({
     syntaxHighlight: false,
     rehypePlugins: [rehypeSlug, [rehypePrettyCode, {
       theme: "everforest-dark",
     }]]
   }), sitemap(), robotsTxt(), icon()],
+
   site: "https://lakshb.dev",
+
   adapter: vercel({
     webAnalytics: {
             enabled: true,
@@ -29,4 +32,8 @@ export default defineConfig({
             "./public/fonts/Satoshi-Bold.ttf",
         ],
     }),
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });

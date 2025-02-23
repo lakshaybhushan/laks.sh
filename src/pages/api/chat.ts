@@ -1,5 +1,4 @@
 import type { APIRoute } from "astro";
-// import { createOpenAI } from "@ai-sdk/openai";
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { streamText, convertToCoreMessages } from "ai";
 import aboutMe from "../../utils/aboutMe";
@@ -13,8 +12,8 @@ const google = createGoogleGenerativeAI({
 export const POST: APIRoute = async ({ request }) => {
 	const { messages } = await request.json();
 
-	const result = await streamText({
-		model: google("gemini-1.5-flash-8b"),
+	const result = streamText({
+		model: google("gemini-2.0-flash-001"),
 		system: aboutMe(),
 		temperature: 0.5,
 		messages: convertToCoreMessages(messages),
