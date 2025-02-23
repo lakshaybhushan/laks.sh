@@ -1,18 +1,18 @@
 import { defineCollection, z } from "astro:content";
+import { glob } from "astro/loaders";
 
 const postsCollection = defineCollection({
-	type: "content",
+	loader: glob({pattern: "**/*.mdx", base: "src/content/thoughts"}),
 	schema: ({ image }) =>
 		z.object({
-			title: z.string(),
+			title: z.string(),	
 			date: z.coerce.date(),
 			excerpt: z.string(),
-			cover: image().refine((img) => img.width >= 400, {
-				message: "Cover image must be at least 400px wide",
-			}),
+			cover: image(),
 		}),
 });
 
+
 export const collections = {
 	thoughts: postsCollection,
-};
+};	

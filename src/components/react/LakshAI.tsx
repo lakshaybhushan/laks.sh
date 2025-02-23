@@ -1,5 +1,5 @@
 import { marked } from "marked";
-import { useChat } from "ai/react";
+import { useChat } from "@ai-sdk/react";
 import { useEffect, useRef } from "react";
 import { IoArrowUpSharp } from "react-icons/io5";
 import { motion, AnimatePresence } from "framer-motion";
@@ -21,14 +21,8 @@ export default function LakshAI() {
 
 	marked.setOptions({ renderer });
 
-	const {
-		messages,
-		input,
-		handleInputChange,
-		handleSubmit,
-		isLoading,
-		setInput,
-	} = useChat();
+	const { messages, input, handleInputChange, handleSubmit, setInput, status } =
+		useChat();
 
 	const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -49,13 +43,14 @@ export default function LakshAI() {
 		setInput(text);
 	};
 
-	const isDisabled = isLoading || input.trim() === "";
+	const isProcessing = status === "streaming" || status === "submitted";
+	const isDisabled = isProcessing || input.trim() === "";
 
 	return (
 		<div className="flex h-[600px] flex-col text-sm">
 			<div
 				ref={chatContainerRef}
-				className="flex-1 overflow-y-auto rounded-lg border border-body/20 bg-amber-50/50 p-4">
+				className="border-body/20 flex-1 overflow-y-auto rounded-lg border bg-amber-50/50 p-4">
 				<AnimatePresence initial={false} mode="popLayout">
 					{messages.map((m) => (
 						<motion.div
@@ -100,13 +95,13 @@ export default function LakshAI() {
 				<button
 					onClick={() => handleButtonClick("What is your design philosophy?")}
 					className="rounded-lg bg-rose-100 px-2.5 py-1.5 text-rose-700 transition duration-300 ease-in-out md:hover:scale-95 md:hover:bg-rose-200 md:hover:text-rose-900"
-					disabled={isLoading}>
+					disabled={isProcessing}>
 					What is your design philosophy?
 				</button>
 				<button
 					onClick={() => handleButtonClick("Are you available for hire?")}
 					className="rounded-lg bg-violet-100 px-2.5 py-1.5 text-violet-700 transition duration-300 ease-in-out md:hover:scale-95 md:hover:bg-violet-200 md:hover:text-violet-900"
-					disabled={isLoading}>
+					disabled={isProcessing}>
 					Are you available for hire?
 				</button>
 				<button
@@ -116,7 +111,7 @@ export default function LakshAI() {
 						)
 					}
 					className="rounded-lg bg-amber-100 px-2.5 py-1.5 text-amber-700 transition duration-300 ease-in-out md:hover:scale-95 md:hover:bg-amber-200 md:hover:text-amber-900"
-					disabled={isLoading}>
+					disabled={isProcessing}>
 					How much time does it take for you to design & code a website?
 				</button>
 			</div>
@@ -126,9 +121,9 @@ export default function LakshAI() {
 						type="text"
 						value={input}
 						onChange={handleInputChange}
-						disabled={isLoading}
-						className={`flex-1 rounded-l-full border border-r-0 border-body/20 bg-amber-50/50 px-4 py-2.5 placeholder:text-body/50 focus:outline-none focus:ring-0 active:focus:outline-none ${
-							isLoading ? "cursor-not-allowed" : "cursor-auto"
+						disabled={isProcessing}
+						className={`border-body/20 placeholder:text-body/50 flex-1 rounded-l-full border border-r-0 bg-amber-50/50 px-4 py-2.5 focus:ring-0 focus:outline-none active:focus:outline-none ${
+							isProcessing ? "cursor-not-allowed" : "cursor-auto"
 						}`}
 						placeholder="Ask about me or my work!"
 					/>
@@ -137,7 +132,7 @@ export default function LakshAI() {
 						disabled={isDisabled}
 						aria-label="Send message"
 						name="send message"
-						className="rounded-r-full border border-l-0 border-body/20 px-1.5 focus:outline-none focus:ring-0 active:focus:outline-none">
+						className="border-body/20 rounded-r-full border border-l-0 px-1.5 focus:ring-0 focus:outline-none active:focus:outline-none">
 						<div
 							className={`rounded-full p-2 ${isDisabled ? "bg-hoverColor transition duration-300 ease-in-out" : "bg-primary transition duration-300 ease-in-out md:hover:scale-95"}`}>
 							<IoArrowUpSharp
@@ -147,21 +142,21 @@ export default function LakshAI() {
 					</button>
 				</div>
 			</form>
-			<p className="pt-4 text-sm text-body/80">
+			<p className="text-body/80 pt-4 text-sm">
 				Everyone makes mistakes, including this AI powered by{" "}
 				<a
 					href="https://ai.google.dev/"
 					target="_blank"
 					rel="noopener noreferrer"
-					className="text-body underline-offset-4 transition duration-150 ease-in-out md:hover:text-primary md:hover:underline">
-					Google's Gemini 1.5 Flash 8B
+					className="text-body md:hover:text-primary underline-offset-4 transition duration-150 ease-in-out md:hover:underline">
+					Google's Gemini 2.0 Flash
 				</a>{" "}
 				and{" "}
 				<a
 					href="https://sdk.vercel.ai/"
 					target="_blank"
 					rel="noopener noreferrer"
-					className="text-body underline-offset-4 transition duration-150 ease-in-out md:hover:text-primary md:hover:underline">
+					className="text-body md:hover:text-primary underline-offset-4 transition duration-150 ease-in-out md:hover:underline">
 					Vercel AI SDK
 				</a>
 				. Make sure to double-check important information.

@@ -1,18 +1,17 @@
-[	
+[
 	{
 		"id": 1,
-		"title": "ArkAid",
-		"tag": "New!",
-		"description": "A game performance analytics platform",
-		"link": "https://github.com/lakshaybhushan/Arkaid-IIA"
-	},
-	{
-		"id": 2,
 		"title": "Next.js + Notion Waitlist Template",
-		"tag": "LIVE on Vercel!",
 		"description": "A simple Next.js + Notion as CMS waitlist template",
 		"link": "https://vercel.com/templates/next.js/next-js-waitlist-with-notion-cms"
 	},
+	{
+		"id": 2,
+		"title": "ArkAid",
+		"description": "A game performance analytics platform",
+		"link": "https://github.com/lakshaybhushan/Arkaid-IIA"
+	},
+
 	{
 		"id": 3,
 		"title": "What the Hack?!",

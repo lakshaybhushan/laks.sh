@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme{
+    --color-bgColor: #FDFFF4;
+    --color-primary: #00997E;
+    --color-title: #535353;
+    --color-body: #666;
+    --color-hoverColor: #DEFFEB;
+
+    --font-*: initial;
+    --font-sans: Satoshi, sans-serif;
+    --font-serif: Instrument-Serif, serif;
+}
