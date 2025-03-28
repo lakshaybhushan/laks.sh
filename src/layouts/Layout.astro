@@ -6,7 +6,7 @@ import Footer from "../components/Footer.astro";
 import { ClientRouter } from "astro:transitions";
 import Metadata from "../components/Metadata.astro";
 import SpeedInsights from "@vercel/speed-insights/astro";
-
+import Blur from "../components/Blur.astro";
 interface Props {
 	title: string;
 }
@@ -17,10 +17,7 @@ const { title } = Astro.props;
 <html lang="en" class="bg-bgColor">
 	<head>
 		<meta charset="UTF-8" />
-		<meta
-			name="description"
-			content="A minimal personal portfolio website made with Astro, React and Tailwind CSS"
-		/>
+		<meta name="description" content="A minimal personal portfolio website made with Astro, React and Tailwind CSS" />
 		<meta name="viewport" content="width=device-width" />
 
 		<Metadata
@@ -69,10 +66,11 @@ const { title } = Astro.props;
 	</head>
 	<body
 		class="text-body selection:bg-primary selection:text-hoverColor mx-auto my-8 max-w-[400px] px-4 md:my-16 md:max-w-[600px]">
-		<main class="font-sans">
+		<main class="relative font-sans">
 			<Nav />
 			<slot />
 			<Footer />
+			<Blur />
 		</main>
 		<ClientRouter />
 		<SpeedInsights />
