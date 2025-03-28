@@ -4,12 +4,13 @@ import { Icon } from "astro-icon/components";
 import { RiArrowRightUpLine } from "react-icons/ri";
 import projectsData from "../constants/projects.json";
 import socialsData from "../constants/socials.json";
+import designsData from "../constants/designs.json";
 import ProjectCard from "../components/ProjectCard.astro";
 import DesignCard from "../components/DesignCard.astro";
-import { designs } from "../assets/designs";
 
 const projects = projectsData;
 const socials = socialsData;
+const designs = designsData;
 ---
 
 <Layout title="Lakshay Bhushan">
@@ -75,7 +76,7 @@ const socials = socialsData;
 		<div class="pt-4">
 			{
 				designs.map((design) => (
-					<DesignCard imagePath={design.image} altText={design.title} title={design.title} link={design.link} />
+					<DesignCard altText={design.title} title={design.title} link={design.link} imageUrl={design.imageUrl} />
 				))
 			}
 		</div>
