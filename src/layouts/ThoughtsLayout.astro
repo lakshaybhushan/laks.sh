@@ -1,10 +1,11 @@
 ---
 import "../styles/global.css";
 import { AstroFont } from "astro-font";
+import { getCollection } from "astro:content";
 import Footer from "../components/Footer.astro";
 import { ClientRouter } from "astro:transitions";
 import ThoughtsNav from "../components/ThoughtsNav.astro";
-import { getCollection } from "astro:content";
+import BottomBlur from "../components/BottomBlur.astro";
 import type { CollectionEntry } from "astro:content";
 import Metadata from "../components/Metadata.astro";
 import { blurTransition, blurTransitionStyles } from "../transitions/blur";
@@ -93,6 +94,7 @@ if (!post) {
 				<slot />
 			</div>
 			<Footer />
+			<BottomBlur />
 		</main>
 		<ClientRouter />
 	</body>

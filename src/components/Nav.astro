@@ -2,11 +2,13 @@
 const currentPath = Astro.url.pathname;
 const isHomePage = currentPath === "/";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
+import { blurTransition } from "../transitions/blur";
 ---
 
 <nav class="flex items-center justify-between pb-8 tracking-tight">
 	<div>
 		{
+			// for a purspose i've changed the name to nav-logo because don't want that to be animated
 			isHomePage ? (
 				<img
 					src="/favicon.svg"
@@ -14,35 +16,42 @@ import { MdOutlineKeyboardBackspace } from "react-icons/md";
 					width="18"
 					height="18"
 					class="transition-all duration-300 ease-linear hover:rotate-180"
+					transition:name="nav-logo"
+					transition:animate={blurTransition}
 				/>
 			) : (
 				<a
 					href="/"
 					target="_self"
-					class="hover:text-primary underline-offset-4 transition duration-150 ease-in-out hover:underline">
+					class="hover:text-primary underline-offset-4 transition duration-150 ease-in-out hover:underline"
+					transition:name="nav-left-link"
+					transition:animate={blurTransition}>
 					<MdOutlineKeyboardBackspace className="-mt-0.5 inline-block" />
 					<span>home</span>
 				</a>
 			)
 		}
 	</div>
-	<div class="flex items-center gap-4">
+	<div class="flex items-center gap-4" transition:persist="nav-links">
 		<a
 			href="/thoughts"
 			target="_self"
-			class="hover:text-primary underline-offset-4 transition duration-150 ease-in-out hover:underline">
+			class="hover:text-primary underline-offset-4 transition duration-150 ease-in-out hover:underline"
+			transition:name="nav-link-thoughts">
 			thoughts
 		</a>
 		<a
 			href="/colophon"
 			target="_self"
-			class="hover:text-primary underline-offset-4 transition duration-150 ease-in-out hover:underline">
+			class="hover:text-primary underline-offset-4 transition duration-150 ease-in-out hover:underline"
+			transition:name="nav-link-colophon">
 			colophon
 		</a>
 		<a
 			href="/ai"
 			target="_self"
-			class="hover:text-primary underline-offset-4 transition duration-150 ease-in-out hover:underline">
+			class="hover:text-primary underline-offset-4 transition duration-150 ease-in-out hover:underline"
+			transition:name="nav-link-ai">
 			laksh://ai
 		</a>
 	</div>
