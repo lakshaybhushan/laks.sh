@@ -7,6 +7,7 @@ import ThoughtsNav from "../components/ThoughtsNav.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import Metadata from "../components/Metadata.astro";
+import { blurTransition, blurTransitionStyles } from "../transitions/blur";
 
 interface Props {
 	post: CollectionEntry<"thoughts">;
@@ -33,10 +34,7 @@ if (!post) {
 <html lang="en" class="bg-bgColor">
 	<head>
 		<meta charset="UTF-8" />
-		<meta
-			name="description"
-			content="A minimal personal portfolio website made with Astro, React and Tailwind CSS"
-		/>
+		<meta name="description" content="A minimal personal portfolio website made with Astro, React and Tailwind CSS" />
 		<meta name="viewport" content="width=device-width" />
 
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -85,12 +83,15 @@ if (!post) {
 				},
 			]}
 		/>
+		<style is:global set:html={blurTransitionStyles}></style>
 	</head>
 	<body
 		class="text-body selection:bg-primary selection:text-hoverColor mx-auto my-8 max-w-[400px] px-4 md:my-16 md:max-w-[600px]">
 		<main class="font-sans">
 			<ThoughtsNav />
-			<slot />
+			<div transition:animate={blurTransition}>
+				<slot />
+			</div>
 			<Footer />
 		</main>
 		<ClientRouter />
