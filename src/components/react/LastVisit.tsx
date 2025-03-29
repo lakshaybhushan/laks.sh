@@ -16,27 +16,37 @@ const LastVisit: React.FC = () => {
 		const fetchLastVisit = async () => {
 			try {
 				const storedData = localStorage.getItem("lastVisitLocation");
+				const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours cache TTL
+				let shouldFetchFromApi = true;
 
 				if (storedData) {
-					setLastVisit(JSON.parse(storedData));
+					const parsedData = JSON.parse(storedData) as VisitorLocation;
+					setLastVisit(parsedData);
 					setLoading(false);
+
+					// Only fetch from API if stored data is older than the TTL
+					if (parsedData.timestamp && Date.now() - parsedData.timestamp < CACHE_TTL) {
+						shouldFetchFromApi = false;
+					}
 				}
 
-				try {
-					const response = await fetch("/api/lastVisit");
+				if (shouldFetchFromApi) {
+					try {
+						const response = await fetch("/api/lastVisit");
 
-					if (!response.ok) {
-						throw new Error("Failed to fetch location data");
+						if (!response.ok) {
+							throw new Error("Failed to fetch location data");
+						}
+
+						const data = await response.json();
+
+						localStorage.setItem("lastVisitLocation", JSON.stringify(data));
+						setLastVisit(data);
+					} catch (error) {
+						console.error("Error fetching location:", error);
+					} finally {
+						setLoading(false);
 					}
-
-					const data = await response.json();
-
-					localStorage.setItem("lastVisitLocation", JSON.stringify(data));
-					setLastVisit(data);
-				} catch (error) {
-					console.error("Error fetching location:", error);
-				} finally {
-					setLoading(false);
 				}
 			} catch (error) {
 				console.error("Error in location handling:", error);

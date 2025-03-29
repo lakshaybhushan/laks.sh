@@ -28,7 +28,7 @@ const getLocationFromIp = async (ip: string): Promise<VisitorLocation> => {
 		return cachedData.data;
 	}
 
-	if (ip === "127.0.0.1" || ip === "::1") {
+	if (ip === "127.0.0.1" || ip === "::1" || ip === "8.8.8.8") {
 		const localhostData = {
 			city: "Localhost",
 			country: "Development",
@@ -41,7 +41,7 @@ const getLocationFromIp = async (ip: string): Promise<VisitorLocation> => {
 
 	try {
 		console.log(`Fetching location for IP: ${ip}`);
-		const response = await fetch(`https://ipapi.co/${ip}/json/`);
+		const response = await fetch(`https://freeipapi.com`);
 
 		if (!response.ok) {
 			throw new Error(`Failed to fetch location data: ${response.statusText}`);
@@ -54,8 +54,8 @@ const getLocationFromIp = async (ip: string): Promise<VisitorLocation> => {
 		}
 
 		const locationData = {
-			city: data.city || "Unknown",
-			country: data.country_name || "Unknown",
+			city: data.cityName || "Unknown",
+			country: data.countryName || "Unknown",
 			timestamp: Date.now(),
 		};
 
