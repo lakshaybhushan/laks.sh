@@ -2,7 +2,6 @@
 const currentPath = Astro.url.pathname;
 const isHomePage = currentPath === "/";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
-import { blurTransition } from "../transitions/blur";
 ---
 
 <nav class="flex items-center justify-between pb-8 tracking-tight">
@@ -16,16 +15,12 @@ import { blurTransition } from "../transitions/blur";
 					width="18"
 					height="18"
 					class="transition-all duration-300 ease-linear hover:rotate-180"
-					transition:name="nav-logo"
-					transition:animate={blurTransition}
 				/>
 			) : (
 				<a
 					href="/"
 					target="_self"
-					class="hover:text-primary underline-offset-4 transition duration-150 ease-in-out hover:underline"
-					transition:name="nav-left-link"
-					transition:animate={blurTransition}>
+					class="hover:text-primary underline-offset-4 transition duration-150 ease-in-out hover:underline">
 					<MdOutlineKeyboardBackspace className="-mt-0.5 inline-block" />
 					<span>home</span>
 				</a>
@@ -36,22 +31,19 @@ import { blurTransition } from "../transitions/blur";
 		<a
 			href="/thoughts"
 			target="_self"
-			class="hover:text-primary underline-offset-4 transition duration-150 ease-in-out hover:underline"
-			transition:name="nav-link-thoughts">
+			class="hover:text-primary underline-offset-4 transition duration-150 ease-in-out hover:underline">
 			thoughts
 		</a>
 		<a
 			href="/colophon"
 			target="_self"
-			class="hover:text-primary underline-offset-4 transition duration-150 ease-in-out hover:underline"
-			transition:name="nav-link-colophon">
+			class="hover:text-primary underline-offset-4 transition duration-150 ease-in-out hover:underline">
 			colophon
 		</a>
 		<a
 			href="/ai"
 			target="_self"
-			class="hover:text-primary underline-offset-4 transition duration-150 ease-in-out hover:underline"
-			transition:name="nav-link-ai">
+			class="hover:text-primary underline-offset-4 transition duration-150 ease-in-out hover:underline">
 			laksh://ai
 		</a>
 	</div>
