@@ -30,6 +30,7 @@
 		"astro-icon": "^1.1.5",
 		"astro-robots-txt": "^1.0.0",
 		"clsx": "^2.1.1",
+		"colorthief": "^2.6.0",
 		"dotenv": "^16.4.7",
 		"framer-motion": "^12.6.2",
 		"marked": "^15.0.7",

@@ -12,16 +12,6 @@ import tailwindcss from "@tailwindcss/vite";
 // https://astro.build/config
 export default defineConfig({
 	output: "static",
-	image: {
-		domains: ["i5hw62wsgz.ufs.sh"],
-		remotePatterns: [
-			{
-				hostname: "i5hw62wsgz.ufs.sh",
-				protocol: "https",
-			},
-		],
-	},
-
 	integrations: [
 		react(),
 		mdx({

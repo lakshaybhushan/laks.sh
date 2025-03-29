@@ -6,7 +6,7 @@ import projectsData from "../constants/projects.json";
 import socialsData from "../constants/socials.json";
 import designsData from "../constants/designs.json";
 import ProjectCard from "../components/ProjectCard.astro";
-import DesignCard from "../components/DesignCard.astro";
+import { DesignCard } from "../components/react/DesignCard";
 
 const projects = projectsData;
 const socials = socialsData;
@@ -73,13 +73,11 @@ const designs = designsData;
 
 	<section class="pt-8">
 		<h2 class="text-title font-medium tracking-tight">Designs</h2>
-		<div class="pt-4">
-			{
-				designs.map((design) => (
-					<DesignCard altText={design.title} title={design.title} link={design.link} imageUrl={design.imageUrl} />
-				))
-			}
-		</div>
+		{
+			designs.map((design) => (
+				<DesignCard title={design.title} description={design.description} imageUrl={design.imageUrl} client:load />
+			))
+		}
 	</section>
 
 	<div class="flex w-full flex-col items-start justify-center pt-8">
