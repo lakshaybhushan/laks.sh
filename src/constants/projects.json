@@ -10,5 +10,17 @@
 		"title": "Next.js + Notion Waitlist Template",
 		"description": "A simple Next.js and Notion as CMS waitlist template",
 		"link": "https://vercel.com/templates/next.js/next-js-waitlist-with-notion-cms"
+	},
+	{
+		"id": 3,
+		"title": "KalaKunj",
+		"description": "Traditional Indian art showcase in AR",
+		"link": "https://github.com/lakshaybhushan/kalakunj"
+	},
+	{
+		"id": 4,
+		"title": "voyageVR",
+		"description": "End traveller focused VR tourism",
+		"link": "https://github.com/lakshaybhushan/voyageVR"
 	}
 ]

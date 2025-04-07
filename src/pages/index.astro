@@ -4,13 +4,11 @@ import { Icon } from "astro-icon/components";
 import { RiArrowRightUpLine } from "react-icons/ri";
 import projectsData from "../constants/projects.json";
 import socialsData from "../constants/socials.json";
-import designsData from "../constants/designs.json";
 import ProjectCard from "../components/ProjectCard.astro";
-import { DesignCard } from "../components/react/DesignCard";
+import { PiLightbulbFill } from "react-icons/pi";
 
 const projects = projectsData;
 const socials = socialsData;
-const designs = designsData;
 ---
 
 <Layout title="Lakshay Bhushan">
@@ -53,7 +51,7 @@ const designs = designsData;
 		<div class="pt-1.5">
 			{projects.map((project) => <ProjectCard project={project} />)}
 		</div>
-		<!-- <div class="group">
+		<div class="group">
 			<p
 				class="border-body/20 bg-hoverColor/60 text-body mt-4 w-fit rounded-md border px-2 py-1 text-xs transition-all duration-300 ease-in-out">
 				<PiLightbulbFill
@@ -68,21 +66,10 @@ const designs = designsData;
 					>GitHub</a
 				> for more projects. Most of them are open-source.
 			</p>
-		</div> -->
+		</div>
 	</section>
 
-	<section class="pt-8">
-		<h2 class="text-title font-medium tracking-tight">Designs</h2>
-		{
-			designs.map((design) => (
-				<DesignCard title={design.title} description={design.description} imageUrl={design.imageUrl} client:load />
-			))
-		}
-	</section>
-
-	<div class="flex w-full flex-col items-start justify-center pt-8">
+	<div class="flex w-full flex-col items-center justify-center pt-8">
 		<Icon name="signature" width={150} height={97.04} />
-		<p class="text-body text-sm font-medium">Lakshay Bhushan</p>
-		<p class="text-body text-sm">March, 2025</p>
 	</div>
 </Layout>

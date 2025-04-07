@@ -22,16 +22,24 @@
 	},
 	{
 		"id": 4,
+		"name": "Behance",
+		"url": "https://www.behance.net/lakshaybhushan",
+		"target": "_blank",
+		"icon": "behance"
+	},
+	{
+		"id": 5,
 		"name": "linkedin",
 		"url": "https://www.linkedin.com/in/lakshaybhushan/",
 		"target": "_blank",
 		"icon": "linkedin"
 	},
 	{
-		"id": 5,
+		"id": 6,
 		"name": "email",
 		"url": "mailto:lakshaybhushan2403@gmail.com",
 		"target": "_blank",
 		"icon": "email"
 	}
+
 ]
