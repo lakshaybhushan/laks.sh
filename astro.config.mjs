@@ -9,31 +9,38 @@ import vercel from "@astrojs/vercel";
 import rehypePrettyCode from "rehype-pretty-code";
 import tailwindcss from "@tailwindcss/vite";
 
-
 // https://astro.build/config
 export default defineConfig({
-  output: "static",
+	output: "static",
+	integrations: [
+		react(),
+		mdx({
+			syntaxHighlight: false,
+			rehypePlugins: [
+				rehypeSlug,
+				[
+					rehypePrettyCode,
+					{
+						theme: "everforest-dark",
+					},
+				],
+			],
+		}),
+		sitemap(),
+		robotsTxt(),
+		icon(),
+	],
 
-  integrations: [react(), mdx({
-    syntaxHighlight: false,
-    rehypePlugins: [rehypeSlug, [rehypePrettyCode, {
-      theme: "everforest-dark",
-    }]]
-  }), sitemap(), robotsTxt(), icon()],
+	site: "https://lakshb.dev",
 
-  site: "https://lakshb.dev",
+	adapter: vercel({
+		webAnalytics: {
+			enabled: true,
+		},
+		includeFiles: ["./public/fonts/Satoshi-Medium.ttf", "./public/fonts/Satoshi-Bold.ttf"],
+	}),
 
-  adapter: vercel({
-    webAnalytics: {
-            enabled: true,
-        },
-        includeFiles: [
-            "./public/fonts/Satoshi-Medium.ttf",
-            "./public/fonts/Satoshi-Bold.ttf",
-        ],
-    }),
-
-  vite: {
-    plugins: [tailwindcss()],
-  },
+	vite: {
+		plugins: [tailwindcss()],
+	},
 });

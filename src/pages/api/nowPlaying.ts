@@ -45,10 +45,32 @@ interface NowPlayingItem {
 	isPlaying: boolean;
 	songUrl: string;
 	title: string;
+	blurDataURL?: string;
 }
 
+// Function to generate a blur data URL from an image
+const generateBlurDataURL = async (imageUrl: string): Promise<string> => {
+	try {
+		const response = await fetch(imageUrl);
+		if (!response.ok) {
+			throw new Error("Failed to fetch image");
+		}
+
+		const arrayBuffer = await response.arrayBuffer();
+		const base64 = Buffer.from(arrayBuffer).toString("base64");
+		const mimeType = response.headers.get("content-type") || "image/jpeg";
+
+		// Use the complete base64 string for better quality blur
+		return `data:${mimeType};base64,${base64}`;
+	} catch (error) {
+		console.error("Error generating blur data URL:", error);
+		// More visible fallback blur data
+		return "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/wAALCAAIAAgBAREA/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/9oACAEBAAA/AH//2Q==";
+	}
+};
+
 const getAccessToken = async (): Promise<string> => {
-	const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
+	const basic = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
 
 	const params = new URLSearchParams();
 	params.append("grant_type", "refresh_token");
@@ -129,12 +151,16 @@ const getNowPlayingItem = async (): Promise<NowPlayingItem> => {
 		const songUrl = song.item.external_urls.spotify;
 		const title = song.item.name;
 
+		// Generate blur data URL if album image exists
+		const blurDataURL = albumImageUrl ? await generateBlurDataURL(albumImageUrl) : "";
+
 		return {
 			albumImageUrl,
 			artist,
 			isPlaying,
 			songUrl,
 			title,
+			blurDataURL,
 		};
 	} catch (error) {
 		console.error("Error in getNowPlayingItem:", error);

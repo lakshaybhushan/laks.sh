@@ -1,10 +1,11 @@
 ---
 import "../styles/global.css";
 import { AstroFont } from "astro-font";
+import { getCollection } from "astro:content";
 import Footer from "../components/Footer.astro";
 import { ClientRouter } from "astro:transitions";
 import ThoughtsNav from "../components/ThoughtsNav.astro";
-import { getCollection } from "astro:content";
+import BottomBlur from "../components/BottomBlur.astro";
 import type { CollectionEntry } from "astro:content";
 import Metadata from "../components/Metadata.astro";
 
@@ -33,10 +34,7 @@ if (!post) {
 <html lang="en" class="bg-bgColor">
 	<head>
 		<meta charset="UTF-8" />
-		<meta
-			name="description"
-			content="A minimal personal portfolio website made with Astro, React and Tailwind CSS"
-		/>
+		<meta name="description" content="A minimal personal portfolio website made with Astro, React and Tailwind CSS" />
 		<meta name="viewport" content="width=device-width" />
 
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -92,6 +90,7 @@ if (!post) {
 			<ThoughtsNav />
 			<slot />
 			<Footer />
+			<BottomBlur />
 		</main>
 		<ClientRouter />
 	</body>

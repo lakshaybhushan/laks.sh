@@ -17,7 +17,10 @@ const SpotifyNowPlaying = () => {
 		isPlaying: false,
 		songUrl: "",
 		title: "No Title",
+		blurDataURL: "",
 	});
+	const [_, setImageLoaded] = useState(false);
+	const [imageVisible, setImageVisible] = useState(false);
 
 	const fetchNowPlaying = async () => {
 		try {
@@ -46,6 +49,19 @@ const SpotifyNowPlaying = () => {
 		};
 	}, []);
 
+	useEffect(() => {
+		setImageLoaded(false);
+		setImageVisible(false);
+	}, [result.albumImageUrl]);
+
+	const handleImageLoad = () => {
+		setImageLoaded(true);
+
+		setTimeout(() => {
+			setImageVisible(true);
+		}, 1500);
+	};
+
 	return (
 		<AnimatePresence mode="wait">
 			{loading ? (
@@ -59,7 +75,7 @@ const SpotifyNowPlaying = () => {
 					href="https://open.spotify.com/user/amcdf5xiittevf5gl1ecjqfyu"
 					rel="noopener noreferrer"
 					target="_blank">
-					<div className="flex items-center gap-2 text-sm text-body">
+					<div className="text-body flex items-center gap-2 text-sm">
 						<div className="flex h-[45px] w-[45px] items-center justify-center rounded-md bg-[#1CB955] text-black">
 							<FaSpotify className="text-2xl" />
 						</div>
@@ -85,15 +101,41 @@ const SpotifyNowPlaying = () => {
 					target="_blank">
 					<div className="group flex h-[45px] transition-all duration-300 ease-in-out md:hover:scale-105">
 						{result.albumImageUrl ? (
-							<motion.img
-								src={result.albumImageUrl}
-								alt="Album Art"
-								width={45}
-								className="rounded-md transition-all duration-300 ease-in-out md:group-hover:grayscale"
-								initial={{ scale: 0.8, opacity: 0 }}
-								animate={{ scale: 1, opacity: 1 }}
-								transition={{ duration: 0.3 }}
-							/>
+							<div className="relative h-[45px] w-[45px] overflow-hidden rounded-md">
+								{/* Blur element that fades out */}
+								{result.blurDataURL && (
+									<motion.div
+										className="absolute inset-0 bg-cover bg-center"
+										style={{
+											backgroundImage: `url(${result.blurDataURL})`,
+											filter: "blur(8px)",
+											transform: "scale(1.5)",
+										}}
+										initial={{ opacity: 1 }}
+										animate={{
+											opacity: imageVisible ? 0 : 1,
+										}}
+										transition={{ duration: 0.6 }}
+									/>
+								)}
+
+								<motion.div
+									className="absolute inset-0"
+									initial={{ opacity: 0 }}
+									animate={{
+										opacity: imageVisible ? 1 : 0,
+									}}
+									transition={{ duration: 0.6 }}>
+									<img
+										src={result.albumImageUrl}
+										alt="Album Art"
+										width={45}
+										height={45}
+										onLoad={handleImageLoad}
+										className="h-full w-full rounded-md object-cover transition-all duration-300 ease-in-out md:group-hover:grayscale"
+									/>
+								</motion.div>
+							</div>
 						) : (
 							<motion.img
 								src="/fallback.png"
@@ -107,15 +149,15 @@ const SpotifyNowPlaying = () => {
 							/>
 						)}
 						<motion.div
-							className="ml-3 mt-1 flex flex-col items-start justify-center"
+							className="mt-1 ml-3 flex flex-col items-start justify-center"
 							initial={{ opacity: 0, x: 20 }}
 							animate={{ opacity: 1, x: 0 }}
 							transition={{ duration: 0.3, delay: 0.1 }}>
-							<h3 className="text-xs font-medium text-black transition duration-150 ease-in-out md:group-hover:text-primary">
+							<h3 className="md:group-hover:text-primary text-xs font-medium text-black transition duration-150 ease-in-out">
 								{result.title}
-								<RiArrowRightUpLine className="inline text-primary opacity-0 transition-opacity duration-150 group-hover:opacity-100" />
+								<RiArrowRightUpLine className="text-primary inline opacity-0 transition-opacity duration-150 group-hover:opacity-100" />
 							</h3>
-							<p className="text-xs text-black transition duration-150 ease-in-out md:group-hover:text-primary">
+							<p className="md:group-hover:text-primary text-xs text-black transition duration-150 ease-in-out">
 								{result.artist}
 							</p>
 						</motion.div>
@@ -132,7 +174,7 @@ const SpotifyNowPlaying = () => {
 					href="https://open.spotify.com/user/amcdf5xiittevf5gl1ecjqfyu"
 					rel="noopener noreferrer"
 					target="_blank">
-					<div className="flex items-center gap-2 text-sm text-body transition-all duration-300 ease-in-out md:hover:scale-105">
+					<div className="text-body flex items-center gap-2 text-sm transition-all duration-300 ease-in-out md:hover:scale-105">
 						<div className="flex h-[45px] w-[45px] items-center justify-center rounded-md bg-[#1CB955] text-black">
 							<FaSpotify className="text-2xl" />
 						</div>

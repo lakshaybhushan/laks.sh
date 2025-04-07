@@ -1,0 +1,31 @@
+---
+import { RiArrowRightUpLine } from "react-icons/ri";
+
+const { project } = Astro.props;
+---
+
+<div class="flex flex-col items-start pt-2">
+	<a
+		href={project.link}
+		target="_blank"
+		rel="noreferrer"
+		class="group md:hover:bg-hoverColor relative -mx-3 w-full transform rounded-lg px-3 py-2 transition-all duration-300 ease-in-out md:hover:scale-105">
+		<div
+			class="text-title md:group-hover:text-primary flex items-center justify-between text-sm font-medium tracking-tight">
+			<div class="flex items-center">
+				<h3>{project.title}</h3>
+				{
+					project.tag && (
+						<div class="ml-2 rounded-full border border-emerald-700 bg-emerald-100 px-1.5 py-0.5 text-xs font-medium text-emerald-700">
+							<span>{project.tag}</span>
+						</div>
+					)
+				}
+			</div>
+			<RiArrowRightUpLine
+				className="text-primary ml-0.5 opacity-0 transition-opacity duration-150 md:group-hover:opacity-100"
+			/>
+		</div>
+		<p class="text-body text-sm">{project.description}</p>
+	</a>
+</div>

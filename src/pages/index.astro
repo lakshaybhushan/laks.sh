@@ -1,87 +1,75 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
-import { PiLightbulbFill } from "react-icons/pi";
 import { RiArrowRightUpLine } from "react-icons/ri";
 import projectsData from "../constants/projects.json";
-import ProjectCard from "../components/react/Card.tsx";
 import socialsData from "../constants/socials.json";
-
+import ProjectCard from "../components/ProjectCard.astro";
+import { PiLightbulbFill } from "react-icons/pi";
 
 const projects = projectsData;
 const socials = socialsData;
 ---
 
 <Layout title="Lakshay Bhushan">
-		<h1 class="text-[2.5rem] font-serif tracking-tight text-primary">
-			Lakshay Bhushan
-		</h1>
-		<div class="flex items-center gap-1.5 font-medium tracking-tight">
-			<h2 class="text-base text-title">designer</h2>
-			<div class="mt-1.5 h-1 w-1 rounded bg-title"></div>
-			<h2 class="text-base text-title">developer</h2>
-			<div class="mt-1.5 h-1 w-1 rounded bg-title"></div>
-			<h2 class="text-base text-title">researcher</h2>
+	<h1 class="text-primary font-serif text-[2.5rem] tracking-tight">Lakshay Bhushan</h1>
+	<div class="flex items-center gap-1.5 font-medium tracking-tight">
+		<h2 class="text-title text-base">designer</h2>
+		<div class="bg-title mt-1.5 h-1 w-1 rounded"></div>
+		<h2 class="text-title text-base">developer</h2>
+		<div class="bg-title mt-1.5 h-1 w-1 rounded"></div>
+		<h2 class="text-title text-base">researcher</h2>
+	</div>
+
+	<p class="bio pt-4 text-sm">
+		Hi there, I'm Lakshay, a 21 y/o CS student at IIIT Delhi who loves to <span class="text-black">design</span> and <span
+			class="text-black">build</span
+		> stuff. I'm currently exploring <span class="text-black">user-centered design</span> for creating more intuitive and
+		seamless interfaces. In my spare time, I enjoy making <span class="text-black">UI concepts</span> or working on <span
+			class="text-black">personal projects</span
+		>.
+	</p>
+
+	<div class="socials grid w-fit grid-cols-3 gap-2 pt-4 tracking-tight md:flex md:flex-row md:items-start">
+		{
+			socials.map((social) => (
+				<a
+					href={social.url}
+					target={social.target}
+					rel={social.target === "_blank" ? "noopener noreferrer" : undefined}
+					class="group md:hover:text-primary flex items-center underline-offset-4 transition duration-150 ease-in-out md:hover:underline">
+					<Icon name={social.icon} size={14} class="mr-1.5" />
+					<span class="text-sm">{social.name}</span>
+					<RiArrowRightUpLine className="opacity-0 transition-opacity duration-150 md:group-hover:opacity-100" />
+				</a>
+			))
+		}
+	</div>
+
+	<section class="pt-8">
+		<h2 class="text-title font-medium tracking-tight">Projects</h2>
+		<div class="pt-1.5">
+			{projects.map((project) => <ProjectCard project={project} />)}
 		</div>
-
-		<p class="pt-4 text-sm">
-			Hi there, I'm Lakshay, a 20 y/o CS undergrad student at IIIT Delhi. I love
-			creating cool stuff in <span class="text-black">extended reality</span> and
-			<span class="text-black">web development</span>. I'm also a designer,
-			passionate about <span class="text-black">UI design</span>, with a
-			minimalist touch. When I'm not coding, I'm diving into research and new
-			ideas.
-		</p>
-
-		<div class="w-fit grid grid-cols-3 gap-2 pt-4 tracking-tight md:flex md:flex-row md:items-start">
-			{
-				socials.map((social) => (
-					<a
-						href={social.url}
-						target={social.target}
-						rel={social.target === "_blank" ? "noopener noreferrer" : undefined}
-						class="group flex items-center underline-offset-4 transition duration-150 ease-in-out md:hover:text-primary md:hover:underline">
-						<Icon name={social.icon} size={14} class="mr-1.5" />
-						<span class="text-sm">{social.name}</span>
-						<RiArrowRightUpLine className="opacity-0 transition-opacity duration-150 md:group-hover:opacity-100" />
-					</a>
-				))
-			}
+		<div class="group">
+			<p
+				class="border-body/20 bg-hoverColor/60 text-body mt-4 w-fit rounded-md border px-2 py-1 text-xs transition-all duration-300 ease-in-out">
+				<PiLightbulbFill
+					className="md:group-hover:text-primary -mt-0.5 inline-block transition-all duration-300 ease-in-out"
+				/>
+				Feel free to explore my
+				<a
+					href="https://github.com/lakshaybhushan?tab=repositories"
+					rel="noopenner noreferrer"
+					target="_blank"
+					class="text-body md:hover:text-primary md:group-hover:text-primary font-medium underline underline-offset-2 transition-all duration-150 ease-in-out"
+					>GitHub</a
+				> for more projects. Most of them are open-source.
+			</p>
 		</div>
+	</section>
 
-		<section class="pt-8">
-			<h2 class="font-medium tracking-tight text-title">Projects</h2>
-			<div class="pt-1.5">
-				{
-					projects.map((project) => (
-						<ProjectCard project={project} client:load />
-					))
-				}
-			</div>
-			<div class="group">
-				<p
-					class="mt-4 w-fit rounded-md border border-body/20 bg-hoverColor/60 px-2 py-1 text-xs text-body transition-all duration-300 ease-in-out">
-					<PiLightbulbFill
-						className="-mt-0.5 inline-block transition-all duration-300 ease-in-out md:group-hover:text-primary"
-					/>
-					Feel free to explore my
-					<a
-						href="https://github.com/lakshaybhushan?tab=repositories"
-						rel="noopenner noreferrer"
-						target="_blank"
-						class="font-medium text-body underline underline-offset-2 transition-all duration-150 ease-in-out md:hover:text-primary md:group-hover:text-primary"
-						>GitHub</a
-					> for more projects. Most of them are open-source.
-				</p>
-			</div>
-		</section>
-
-		<div class="flex w-full items-center justify-center pt-8">
-			<Icon
-				name="signature"
-				width={133}
-				height={81.04}
-			/>
-		</div>
-
+	<div class="flex w-full flex-col items-center justify-center pt-8">
+		<Icon name="signature" width={150} height={97.04} />
+	</div>
 </Layout>
