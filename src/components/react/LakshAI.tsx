@@ -3,10 +3,8 @@ import { useChat } from "@ai-sdk/react";
 import { useEffect, useRef } from "react";
 import { IoArrowUpSharp } from "react-icons/io5";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-	messageVariants,
-	greetingVariants,
-} from "../../utils/animationVariants";
+import { messageVariants, greetingVariants } from "../../utils/animationVariants";
+import { sanitizeHTML } from "../../utils/sanitize";
 
 export default function LakshAI() {
 	const renderer = new marked.Renderer();
@@ -21,8 +19,11 @@ export default function LakshAI() {
 
 	marked.setOptions({ renderer });
 
-	const { messages, input, handleInputChange, handleSubmit, setInput, status } =
-		useChat();
+	const { messages, input, handleInputChange, handleSubmit, setInput, status, error } = useChat({
+		onError: (error) => {
+			console.error("Chat error:", error);
+		},
+	});
 
 	const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -43,6 +44,11 @@ export default function LakshAI() {
 		setInput(text);
 	};
 
+	const sanitizeMarkdown = (content: string): string => {
+		const htmlContent = marked.parse(content) as string;
+		return sanitizeHTML(htmlContent);
+	};
+
 	const isProcessing = status === "streaming" || status === "submitted";
 	const isDisabled = isProcessing || input.trim() === "";
 
@@ -59,16 +65,14 @@ export default function LakshAI() {
 							initial="initial"
 							animate="animate"
 							exit="exit"
-							className={`flex ${
-								m.role === "user" ? "justify-end" : "justify-start"
-							} mb-4`}>
+							className={`flex ${m.role === "user" ? "justify-end" : "justify-start"} mb-4`}>
 							<div
 								className={`${
 									m.role === "user"
 										? "rounded-full bg-blue-100 text-blue-700"
 										: "rounded-full bg-green-100 text-emerald-700"
 								} max-w-xs rounded-lg px-2.5 py-1.5`}>
-								<div dangerouslySetInnerHTML={{ __html: marked(m.content) }} />
+								<div dangerouslySetInnerHTML={{ __html: sanitizeMarkdown(m.content) }} />
 							</div>
 						</motion.div>
 					))}
@@ -83,13 +87,24 @@ export default function LakshAI() {
 							exit="exit"
 							className="mb-4 flex justify-start">
 							<div className="max-w-xs rounded-lg bg-green-100 px-2.5 py-1.5 text-emerald-700">
-								Hi! I'm{" "}
-								<span className="font-semibold">Lakshay's AI persona</span>. Ask
-								me anything about him or his work. I'll be happy to assist you.
+								Hi! I'm <span className="font-semibold">Lakshay's AI persona</span>. Ask me anything about him or his
+								work. I'll be happy to assist you.
 							</div>
 						</motion.div>
 					)}
 				</AnimatePresence>
+
+				{error && (
+					<motion.div
+						variants={messageVariants}
+						initial="initial"
+						animate="animate"
+						className="mb-4 flex justify-start">
+						<div className="max-w-xs rounded-lg bg-red-100 px-2.5 py-1.5 text-red-700">
+							Sorry, something went wrong. Please try again.
+						</div>
+					</motion.div>
+				)}
 			</div>
 			<div className="flex w-full justify-between gap-2 pt-4 text-xs">
 				<button
@@ -105,11 +120,7 @@ export default function LakshAI() {
 					Are you available for hire?
 				</button>
 				<button
-					onClick={() =>
-						handleButtonClick(
-							"How much time does it take for you to design & code a website?",
-						)
-					}
+					onClick={() => handleButtonClick("How much time does it take for you to design & code a website?")}
 					className="rounded-lg bg-amber-100 px-2.5 py-1.5 text-amber-700 transition duration-300 ease-in-out md:hover:scale-95 md:hover:bg-amber-200 md:hover:text-amber-900"
 					disabled={isProcessing}>
 					How much time does it take for you to design & code a website?
