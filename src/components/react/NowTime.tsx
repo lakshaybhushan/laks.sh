@@ -17,7 +17,7 @@ const NowTime: React.FC = () => {
 	useEffect(() => {
 		const fetchLocationAndTime = async () => {
 			try {
-				const locationData = { city: "New Delhi", timeZone: "Asia/Kolkata" };
+				const locationData = { city: "Berlin", timeZone: "Europe/Berlin" };
 				const currentTime = moment().tz(locationData.timeZone);
 				setLocation(locationData.city);
 				setTime(currentTime);
