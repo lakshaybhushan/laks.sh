@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Agentation } from "agentation";
+import { Analytics } from '@vercel/analytics/next';
 import "./globals.css";
 
 const ppMori = localFont({
@@ -35,6 +36,7 @@ export default function RootLayout({
       >
         {children}
         {process.env.NODE_ENV === "development" && <Agentation />}
+        <Analytics />
       </body>
     </html>
   );
