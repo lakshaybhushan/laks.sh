@@ -7,6 +7,8 @@ export default function Home() {
        autoPlay
        muted
        loop
+       playsInline
+       preload="auto"
        className="md:w-1/2 md:h-1/2 w-full h-full object-cover pointer-events-none"
        tabIndex={-1}
      />
