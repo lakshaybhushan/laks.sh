@@ -17,13 +17,6 @@ export function DelayedVideo() {
 
   return (
     <div className="relative md:w-1/2 md:h-1/2 w-full h-full">
-      <img
-        src="/wait-poster.jpg"
-        alt=""
-        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-out ${
-          isPlaying ? "opacity-0" : "opacity-100"
-        }`}
-      />
       <video
         ref={videoRef}
         src="/wait.mp4"
@@ -31,9 +24,7 @@ export function DelayedVideo() {
         loop
         playsInline
         preload="auto"
-        className={`w-full h-full object-cover pointer-events-none transition-opacity duration-700 ease-out ${
-          isPlaying ? "opacity-100" : "opacity-0"
-        }`}
+        className="w-full h-full object-cover pointer-events-none"
         tabIndex={-1}
       />
     </div>
