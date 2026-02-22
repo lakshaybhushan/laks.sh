@@ -1,14 +1,8 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import { Agentation } from "agentation";
 import { Analytics } from '@vercel/analytics/next';
+import { GeistPixelSquare, GeistPixelGrid, GeistPixelCircle, GeistPixelTriangle, GeistPixelLine } from 'geist/font/pixel';
 import "./globals.css";
-
-const ppMori = localFont({
-  src: "../public/PPMori.otf",
-  variable: "--font-pp-mori",
-  display: "swap",
-});
 
 
 export const metadata: Metadata = {
@@ -24,6 +18,16 @@ export const metadata: Metadata = {
   },
 };
 
+const pixelFonts = [
+  GeistPixelSquare,
+  GeistPixelGrid,
+  GeistPixelCircle,
+  GeistPixelTriangle,
+  GeistPixelLine,
+];
+
+const fontVariables = pixelFonts.map(font => font.variable).join(" ");
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -32,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${ppMori.variable} antialiased`}
+        className={`${fontVariables} antialiased`}
       >
         {children}
         {process.env.NODE_ENV === "development" && <Agentation />}

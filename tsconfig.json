@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-  ],
+, "components/font-switcher.tsx"  ],
   "exclude": ["node_modules"]
 }

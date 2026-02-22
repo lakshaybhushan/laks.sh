@@ -1,7 +1,15 @@
+import { FontSwitcher } from "@/components/font-switcher";
+import { Typewriter } from "@/components/typewriter";
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center md:p-24 md:gap-8 gap-4 px-4 py-16">
-      <p></p>
-    </main>
+    <FontSwitcher>
+      <Typewriter
+        text="hey, thanks for stopping by! I'm currently working on something new, check back later :D"
+        delay={1200}
+        speed={50}
+      />
+    </FontSwitcher>
+    
   );
 }
