@@ -55,7 +55,6 @@ export function FontSwitcher({
       <motion.button
         initial={{ opacity: 0, y: -4 }}
         animate={{ opacity: 1, y: 0 }}
-        whileHover={{ opacity: 0.6 }}
         transition={{
           duration: skip ? 0 : 0.3,
           ease: [0.25, 0.1, 0.25, 1],
