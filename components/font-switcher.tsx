@@ -1,7 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { useState, useEffect, useRef } from "react";
+import {
+  motion,
+  useReducedMotion,
+  useAnimate,
+  AnimatePresence,
+} from "motion/react";
 import Image from "next/image";
 
 const STORAGE_KEY = "font-preference";
@@ -29,20 +34,45 @@ export function FontSwitcher({
 }) {
   const [fontIndex, setFontIndex] = useState(0);
   const shouldReduceMotion = useReducedMotion();
+  const [contentScope, animateContent] = useAnimate();
+  const transitioning = useRef(false);
 
   useEffect(() => {
     setFontIndex(getSavedIndex());
   }, []);
 
-  const cycleFont = () => {
-    setFontIndex((prev) => {
-      const next = (prev + 1) % FONTS.length;
-      localStorage.setItem(STORAGE_KEY, String(next));
-      return next;
-    });
-  };
-
   const skip = !!shouldReduceMotion;
+
+  const cycleFont = async () => {
+    if (transitioning.current) return;
+
+    const next = (fontIndex + 1) % FONTS.length;
+    localStorage.setItem(STORAGE_KEY, String(next));
+
+    if (skip) {
+      setFontIndex(next);
+      return;
+    }
+
+    transitioning.current = true;
+
+    await animateContent(
+      contentScope.current,
+      { opacity: 0, filter: "blur(3px)" },
+      { duration: 0.1, ease: [0.4, 0, 1, 1] }
+    );
+
+    setFontIndex(next);
+    await new Promise((r) => requestAnimationFrame(r));
+
+    await animateContent(
+      contentScope.current,
+      { opacity: 1, filter: "blur(0px)" },
+      { duration: 0.15, ease: [0, 0, 0.2, 1] }
+    );
+
+    transitioning.current = false;
+  };
 
   return (
     <motion.main
@@ -64,15 +94,25 @@ export function FontSwitcher({
         className="cursor-pointer w-fit select-none opacity-0"
         aria-label={`Current font: ${FONTS[fontIndex].name}. Click to switch.`}
       >
-        <Image
-          src={FONTS[fontIndex].icon}
-          alt={FONTS[fontIndex].name}
-          width={14}
-          height={14}
-          className="dark:invert"
-        />
+        <AnimatePresence mode="popLayout" initial={false}>
+          <motion.div
+            key={fontIndex}
+            initial={{ opacity: 0, scale: 0.5, filter: "blur(2px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, scale: 0.5, filter: "blur(2px)" }}
+            transition={{ duration: skip ? 0 : 0.12, ease: [0.25, 0.1, 0.25, 1] }}
+          >
+            <Image
+              src={FONTS[fontIndex].icon}
+              alt={FONTS[fontIndex].name}
+              width={14}
+              height={14}
+              className="dark:invert"
+            />
+          </motion.div>
+        </AnimatePresence>
       </motion.button>
-      <div className="mt-8">
+      <div ref={contentScope} className="mt-8">
         {children}
       </div>
     </motion.main>
