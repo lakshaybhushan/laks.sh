@@ -1,0 +1,47 @@
+:root {
+	color-scheme: dark;
+
+	/* Color primitives */
+	--ds-color-void: #0a0a0a;
+	--ds-color-chalk: #dedede;
+	--ds-color-ash: #c7c7c7;
+
+	/* Semantic color tokens */
+	--ds-color-canvas: var(--ds-color-void);
+	--ds-color-ink: var(--ds-color-chalk);
+	--ds-color-ink-soft: var(--ds-color-ash);
+
+	/* Typography — one size, two weights, two ink levels */
+	--ds-font-weight-regular: 400;
+	--ds-font-weight-medium: 500;
+	--ds-text-size: 1rem;
+	--ds-text-leading: 1.25;
+
+	/* Layout */
+	--ds-size-measure: 31rem;
+	--ds-size-shell: 68rem;
+	--ds-space-stack: 1.25rem;
+	--ds-space-section: 2rem;
+
+	/* Motion */
+	--ds-duration-fast: 150ms;
+	--ds-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@theme inline {
+	--color-canvas: var(--ds-color-canvas);
+	--color-ink: var(--ds-color-ink);
+	--color-ink-soft: var(--ds-color-ink-soft);
+
+	--font-sans: var(--font-satoshi);
+	--font-weight-regular: var(--ds-font-weight-regular);
+	--font-weight-medium: var(--ds-font-weight-medium);
+	--leading-display: var(--ds-text-leading);
+	--leading-copy: var(--ds-text-leading);
+
+	--container-measure: var(--ds-size-measure);
+	--container-shell: var(--ds-size-shell);
+	--spacing-stack: var(--ds-space-stack);
+	--spacing-section: var(--ds-space-section);
+	--ease-out: var(--ds-ease-out);
+}
